@@ -16,4 +16,4 @@ async function voteRouteController(req, res) {
     });
 }
 
-module.export = voteRouteController;
+module.exports = voteRouteController;

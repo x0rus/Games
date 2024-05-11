@@ -13,4 +13,4 @@ function parseBody(req, callback) {
     });
 }
 
-module.export = parseBody;
+module.exports = parseBody;
