@@ -1,16 +1,19 @@
-const fs = require("fs");
+const fs = require("fs").promises;
+const { cofnig } = require('../appModules/rating');
+
 
 async function gameRouteController(res) {
-    fs.readFile("./dataset/rating.json", (err, ratingFile) => {
-      if (err) {
-        res.statusCode = 500;
-        res.end("Internal Server Error");
-      }
-      const data = JSON.parse(ratingFile);
-      const game = data[0];
-      res.setHeader("Content-Type", "application/json");
-      res.end(JSON.stringify(game));
-    });
-  }
+  try {
+    const ratingFile = await readFile(cofnig.PATH_TO_RATING_FILE);
+    const data = JSON.parse(ratingFile);
+    const game = data[0];
+    res.setHeader("Content-Type", "application/json");
+    res.end(JSON.stringify(game));
 
-  module.exports = gameRouteController;
+  } catch (error) {
+    res.statusCode = 500;
+    res.end("Internal Server Error");
+  }
+}
+
+module.exports = gameRouteController;
