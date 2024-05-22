@@ -6,8 +6,23 @@ const path = require('path');
 const http = require('http');
 const gameRouteController = require('./controllers/game');
 const voteRouteController= require('./controllers/vote');
+const express = require('express');
+const mainRoute = require('./routes/main');
+const gamesRouter = require('./routes/games'); 
 
-const server = http.createServer((req, res) => {
+
+const PORT = 3000;
+const app = express();
+
+app.use(express.static(path.join(__dirname, 'public'))); 
+
+app.use(mainRoute, gamesRouter); 
+
+app.listen(PORT, () => {
+    console.log(`App listening on port ${PORT}`)
+})
+
+/*const server = http.createServer((req, res) => {
     const url = req.url;
     switch (url) {
         case "/":
@@ -24,4 +39,4 @@ const server = http.createServer((req, res) => {
     }
 });
 
-server.listen(3005)
+server.listen(3005);*/
