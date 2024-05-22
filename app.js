@@ -9,7 +9,7 @@ const PORT = 3000;
 const app = express();
 
 app.use(
-    cors,
+    //cors,
     bodyParser.json(),
     express.static(path.join(__dirname, 'public')),
     mainRoute,
